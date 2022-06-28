@@ -1,0 +1,47 @@
+﻿  cexep1.cpp
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(121,24): warning C4477: “printf”: 格式字符串“%15s”需要类型“char *”的参数，但可变参数 1 拥有了类型“int”
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(131,24): warning C4477: “printf”: 格式字符串“%15s”需要类型“char *”的参数，但可变参数 1 拥有了类型“int”
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(113,9): warning C4101: “index”: 未引用的局部变量
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(155,24): warning C4477: “fprintf”: 格式字符串“%s”需要类型“char *”的参数，但可变参数 1 拥有了类型“int”
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(169,25): warning C4473: “fscanf_s”: 没有为格式字符串传递足够的参数
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(169,25): message : 占位符和其参数预计 2 可变参数，但提供的却是 1 参数
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(169,25): message : 缺失的可变参数 2 为格式字符串“%c”所需
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(169,25): message : 此参数用作缓冲区大小
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(174,21): warning C4477: “fscanf_s”: 格式字符串“%s”需要类型“char *”的参数，但可变参数 1 拥有了类型“int”
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(174,21): message : 此参数由转换说明符使用
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(317,17): warning C4473: “scanf_s”: 没有为格式字符串传递足够的参数
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(317,17): message : 占位符和其参数预计 2 可变参数，但提供的却是 1 参数
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(317,17): message : 缺失的可变参数 2 为格式字符串“%c”所需
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(317,17): message : 此参数用作缓冲区大小
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(430,17): warning C4473: “scanf_s”: 没有为格式字符串传递足够的参数
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(430,17): message : 占位符和其参数预计 2 可变参数，但提供的却是 1 参数
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(430,17): message : 缺失的可变参数 2 为格式字符串“%c”所需
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(430,17): message : 此参数用作缓冲区大小
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(455,21): warning C4473: “scanf_s”: 没有为格式字符串传递足够的参数
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(455,21): message : 占位符和其参数预计 2 可变参数，但提供的却是 1 参数
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(455,21): message : 缺失的可变参数 2 为格式字符串“%c”所需
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(455,21): message : 此参数用作缓冲区大小
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(564,25): warning C4477: “fscanf_s”: 格式字符串“%d”需要类型“int *”的参数，但可变参数 1 拥有了类型“char *”
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(564,25): message : 请考虑在格式字符串中使用“%hhd”
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(565,25): warning C4473: “fscanf_s”: 没有为格式字符串传递足够的参数
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(565,25): message : 占位符和其参数预计 2 可变参数，但提供的却是 1 参数
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(565,25): message : 缺失的可变参数 2 为格式字符串“%s”所需
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(565,25): message : 此参数用作缓冲区大小
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(566,25): warning C4473: “fscanf_s”: 没有为格式字符串传递足够的参数
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(566,25): message : 占位符和其参数预计 2 可变参数，但提供的却是 1 参数
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(566,25): message : 缺失的可变参数 2 为格式字符串“%s”所需
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(566,25): message : 此参数用作缓冲区大小
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(567,25): warning C4477: “fscanf_s”: 格式字符串“%d”需要类型“int *”的参数，但可变参数 1 拥有了类型“int”
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(569,29): warning C4477: “fscanf_s”: 格式字符串“%d”需要类型“int *”的参数，但可变参数 1 拥有了类型“int”
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(632,44): warning C4477: “fscanf_s”: 格式字符串“%c”需要类型“char *”的参数，但可变参数 1 拥有了类型“int”
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(632,44): message : 此参数由转换说明符使用
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(632,44): warning C4473: “fscanf_s”: 没有为格式字符串传递足够的参数
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(632,44): message : 占位符和其参数预计 2 可变参数，但提供的却是 1 参数
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(632,44): message : 缺失的可变参数 2 为格式字符串“%c”所需
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(632,44): message : 此参数用作缓冲区大小
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(632,54): warning C4390: “;”: 找到空的受控语句；这是否是有意的?
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(664,9): warning C4101: “index”: 未引用的局部变量
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(774,15): warning C4101: “k”: 未引用的局部变量
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(773,9): warning C4101: “count”: 未引用的局部变量
+C:\Users\D6701\source\repos\cexep1\cexep1\cexep1.cpp(800,15): warning C4101: “k”: 未引用的局部变量
+  cexep1.vcxproj -> C:\Users\D6701\source\repos\cexep1\Debug\cexep1.exe
