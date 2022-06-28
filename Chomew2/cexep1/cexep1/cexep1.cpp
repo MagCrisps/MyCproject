@@ -1,5 +1,6 @@
 ﻿#include <iostream>
-#define N 2
+#include "String.h"
+#define N 3
 #define TRUE 1
 
 typedef struct Student {
@@ -95,16 +96,20 @@ stul* creatL(stul* head) {
     printf("done.\n");
     return sp;
 }
+
 void OutputL(stul* h) {
     if (h == NULL) {
         printf("失败");
         //exit(-2);//失败
     }
-    printf("学号\t 姓名\t 专业\t 班级\t 成绩①\t 成绩②\t 成绩③\n");
-    for (; h != NULL; h = h->next) {
-        printf("%6s %6s %6s %3d %2d %2d %2d\n", h->name, h->name, h->major, h->classNo, h->score[0], h->score[1], h->score[2]);
+    else {
+        printf("学号\t 姓名\t 专业\t 班级\t 成绩①\t 成绩②\t 成绩③\n");
+        for (; h != NULL; h = h->next) {
+            printf("%6d %6s %6s %6d %6d %6d %6d\n", h->num, h->name, h->major, h->classNo, h->score[0], h->score[1], h->score[2]);
+        }
+        printf("done.\n");
     }
-    printf("done.\n");
+    
 }
 
 void delet(stul* p) {
@@ -128,39 +133,29 @@ stul* storeL(){
     return p;
 }
 //void Search_major_subject_score(stul* head, char* major, )
-void Search_major_subject_score(stul* sp, char* major, int scoreSum, char s) {
-    int index[N];
-    int in = 0;
-    for (; sp->next!=NULL; sp=sp->next) {
-        if (sp->major == major) {
-            int tempSum = 0;
-            for (int h = 0; h < 3; tempSum += sp->score[h++]);
-            switch (s) {
-            case '>': if (tempSum > scoreSum) {
-                printf("%15s\t", sp->num);
-                printf("%15s\t", sp->name);
-                printf("%s\t", sp->major);
-                printf("%d\t", sp->classNo);
-                for (int i = 0; i < 3; i++) {
-                    printf("%d\t", sp->score[i]);
-                }
-                putchar('\n');
-            }break;
-            case '<':if (tempSum > scoreSum) {
-                printf("%15s\t", sp->num);
-                printf("%15s\t", sp->name);
-                printf("%s\t", sp->major);
-                printf("%d\t", sp->classNo);
-                for (int i = 0; i < 3; i++) {
-                    printf("%d\t", sp->score[i]);
-                }
-                putchar('\n');
-            }break;
-            default:printf("出现错误\n");
-            }
-
-        }
+void Search_major_subject_score(stul* sp, char major[], int scoreSum, int n) {
+    if ((sp != NULL)&&(n <= 3)&&(n > 0)) {
+        n--;
+        for (; sp != NULL; sp = sp->next) {          
+            if (!strcmp(sp->major, major)) {
+                if (sp->score[n] < scoreSum) {
+                    printf("%d\t", sp->num);
+                    printf("%15s\t", sp->name);
+                    printf("%s\t", sp->major);
+                    printf("%d\t", sp->classNo);
+                    for (int i = 0; i < 3; i++) {
+                        printf("%d\t", sp->score[i]);
+                    }//for score
+                    putchar('\n');
+                }//if <
+            }//if major
+        }//for sp!=NULL
+        printf("finish.\n");
+   }//if sp!=NULL
+    else {
+        printf("error!\n");
     }
+   
 }
 /*
 存储
@@ -171,15 +166,16 @@ void SaveL(stul* head) {
     }
     else {
         for (; head != NULL; head = head->next) {
-            fprintf(f, "%s %s %s %d %d %d %d\n", head->num, head->name, head->major, head->classNo, head->score[0], head->score[1], head->score[2]);
+            fprintf(f, "%d %s %s %d %d %d %d\n", head->num, head->name, head->major, head->classNo, head->score[0], head->score[1], head->score[2]);
         }
         fclose(f);
+        printf("文件存储完毕\n");
     }
     
 }
 void FetchL(int num) {
     char c = 0;
-    stul* stup = NULL;
+    stul* stup = (stul*)malloc(sizeof(stul));
     if (fopen_s(&f, "studentL.dat", "r")) {
         printf("新建文件失败！\n");
     }
@@ -190,27 +186,28 @@ void FetchL(int num) {
                 n++;
             }
         }
-        fscanf_s(f, "%s %s %s %d %d %d %d", stup->num, 15, stup->name, 15, stup->major, 10, &stup->classNo, &stup->score[0], &stup->score[1], &stup->score[2]);
+        fscanf_s(f, "%d %s %s %d %d %d %d", &stup->num, stup->name, 15, stup->major, 10, &stup->classNo, &stup->score[0], &stup->score[1], &stup->score[2]);
+        stup->next = NULL;
         OutputL(stup);
         printf("查找完毕\n");
         fclose(f);
-
-        
     }
-
 }
-void Delete_num(stul* head, int num) {
+stul* Delete_num(stul* head, int num) {
     stul* temp;
+    stul* headF = head;
+
     if (head != NULL) {
         if (head->num == num) {
             temp = head;
             head = head->next;
+            headF = head;
         }
         else {
-            for (; (head->next != NULL) && (head->next->num != num) && (head != NULL); head = head->next);
-
-            temp = head->next;
-            head = head->next->next;
+            
+            for (;(head != NULL) && (head->next != NULL) && (head->next->num != num) ; head = head->next);
+                temp = head->next;
+                head = head->next->next;
         }
         free(temp);
         printf("删除完成\n");
@@ -218,6 +215,7 @@ void Delete_num(stul* head, int num) {
     else {
         printf("error\n");
     }
+    return headF;
 }
 void Delete_class_subject(stul* head, int classNo, int num, int n) {
     stul* temp  = NULL;
@@ -233,7 +231,6 @@ void Delete_class_subject(stul* head, int classNo, int num, int n) {
              head = head->next->next;
              free(temp);
         }
-       
         printf("删除完成\n");
     }
     else {
@@ -242,7 +239,7 @@ void Delete_class_subject(stul* head, int classNo, int num, int n) {
 }
 /***************************/
 
-stul* CreateList(stul* head) {
+stul* CreateList(stul* h) {
     stul* head = FcreatL(), * sp;
     sp = head;
     for (int i = 0; i < N-1; i++) {
@@ -269,7 +266,7 @@ stul* Search_num(stul* head, int num){
 }
 void InsertList(stul* head) {
     stul* temp = NULL;
-    temp = creatL(temp);
+    temp = FcreatL();
     stul* tflag;
     if (head != NULL) {
         for (; (temp->num > head->num) && (temp->num < head->next->num) && (head != NULL);head = head->next );
@@ -316,6 +313,7 @@ void secL() {
 
     int cn = 0, ss = 0, st = 0;
     char s = 0, senu = 0;
+    char strl[32];
     stul* head = {};
 
     printf("************************************************************************************\n");
@@ -360,13 +358,13 @@ void secL() {
         case '7': 
             printf("请输入需要删除的学号\n");
             scanf_s("%d", &cn); 
-            Delete_num(head, cn); break;
+            head = Delete_num(head, cn); break;
         case '8': 
             printf("请输入专业、课程序号和比较分数\n");
-            scanf_s("%s", str, 15);
+            scanf_s("%s", strl, 15);
             scanf_s("%d", &ss);
             scanf_s("%d", &cn);
-            Search_major_subject_score(head,str,cn,s); break;
+            Search_major_subject_score(head,strl,cn,ss); break;
         case '9': 
             printf("请输入班级、课程序号和比较分数\n");
             scanf_s("%d", &st);
