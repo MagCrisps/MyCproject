@@ -1,0 +1,6 @@
+﻿  DSExp1.cpp
+C:\Users\D6701\source\repos\DSExp1\DSExp1\DSExp1.cpp(64,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\D6701\source\repos\DSExp1\DSExp1\DSExp1.cpp(53,8): warning C4101: “h”: 未引用的局部变量
+C:\Users\D6701\source\repos\DSExp1\DSExp1\DSExp1.cpp(113,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\D6701\source\repos\DSExp1\DSExp1\DSExp1.cpp(237,35): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+  DSExp1.vcxproj -> C:\Users\D6701\source\repos\DSExp1\x64\Debug\DSExp1.exe
