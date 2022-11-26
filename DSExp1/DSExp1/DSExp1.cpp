@@ -23,13 +23,18 @@ void MoveK1(HLink &H, int k);
 void ReverseN2(HLink& H);
 void SortPriceL(HLink& H);
 void upBed(HLink& H, int beds);
-
+void menu();
 
 int main(int argc, char* argv[])
 {
-	HLink H;
-	Build(H);
-	Exp(H);
+	
+	int numss = 0;
+	char strs[7];
+	char str[7];
+	int nums3 = 0;
+	int nums = 0;
+	HLink pt = NULL;
+	/*
 	char str[] = "KF3";
 	char str2[] = "满员";
 	printf("the location is %d\n", Find(H, str));
@@ -45,9 +50,79 @@ int main(int argc, char* argv[])
 	Exp(H);
 	upBed(H, 5);
 	Exp(H);
+	*/
+	HLink H;
+	char ch = 0;
+	Build(H);
+	Exp(H);
+	menu();
+	while (1) {
+		ch = getchar();
+		if (ch == '\n') {
+			ch = getchar();
+		}
+		switch (ch) {
+		case '0':exit(0); break;
+		case '1': 
+			Build(H);
+			Exp(H); break;
+		case '2':
+			Exp(H); break;
+		case '3':
+			if(getchar()=='\n')
+			scanf_s("%s", str,7);
+			//puts(str);
+			printf("the location is %d\n", Find(H, str));
+			break;
+		case '4':
+			scanf_s("%d", &nums);
+			scanf_s("%s", strs,7);
+			updateH(H, nums, strs);
+			break;
+		case '5':ADD(H); break;
+		case '6':
+			pt = FirstH(H);
+			printf("客房名称：%7s 标准价格：%5f 入住价格：%5f 床位数：%3d 入住状态：%s\n", pt->roomN, pt->Price, pt->PriceL, pt->Beds, pt->State);//wraning
+			break;
+		case '7':
+			scanf_s("%d", &numss);
+			MoveK1(H, numss);
+			break;
+		case '8': 
+			ReverseN2(H);
+			break;
+		case '9':
+			SortPriceL(H);
+			break;
+		case '@':
+			scanf_s("%d", &nums3);
+			upBed(H,nums3);
+			break;
+		}
+	}
 	return 0;
 }
-
+void menu() {
+	for (int i = 0; i < 32; i++) {
+		putchar('*');
+	}
+	putchar('\n');
+	printf("\t1 >>>>> Build\n");
+	printf("\t2 >>>>> Exp\n");
+	printf("\t3 >>>>> Find\n");
+	printf("\t4 >>>>> updateH\n");
+	printf("\t5 >>>>> ADD\n");
+	printf("\t6 >>>>> FirstH\n");
+	printf("\t7 >>>>> MoveK1\n");
+	printf("\t8 >>>>> ReverseN2\n");
+	printf("\t9 >>>>> SortPriceL\n");
+	printf("\t@ >>>>> upBed\n");
+	printf("\t0 >>>>> EXIT\n");
+	for (int i = 0; i < 32; i++) {
+		putchar('*');
+	}
+	putchar('\n');
+}
 void Build(HLink& H) {
 	FILE* fp;
 	HLink h;
@@ -115,9 +190,38 @@ void ADD(HLink& H) {
 		p = p->next;
 	}
 	printf("\tADD FINISH\n");
-}void MoveK1(HLink &H,int k){
-	HLink p = H->next, lp = p;
-	int n = 0,i = 1;
+
+}
+HLink FirstH(HLink& H) {
+	HLink preMaxP, pre;
+	pre = H;
+	preMaxP = H;
+	while (pre->next) {
+		if (pre->next->PriceL > preMaxP->next->PriceL) {
+			preMaxP = pre;
+		}
+		pre = pre->next;
+	}
+	pre = preMaxP->next;
+	preMaxP->next = pre->next;
+	return pre;
+}
+void MoveK1(HLink &H,int k){
+	HLink p = H, temp;
+	int i = k - 1;
+	if (k < 1 || k>5) {
+		printf("out of number");
+		exit(-2);
+	}
+	while (i) {
+		p = p->next;
+		i--;
+	}
+	temp = p->next;
+	p->next = temp->next;
+	temp->next = H->next;
+	H->next = temp;
+	/*
 	while (p) {
 		p = p->next;
 		n++;
@@ -128,12 +232,7 @@ void ADD(HLink& H) {
 		exit(-1);
 	}
 	p = H->next;
-	/*
-	while (p&&p->next&&p->next->next&&i) {
-		lp = p;
-		p = p->next->next->next;
-	}//find out the last but not least node
-	*/
+	
 	while (i && p && p->next) {
 		p = p->next;
 		i--;
@@ -142,14 +241,8 @@ void ADD(HLink& H) {
 	p->next = p->next->next;
 	temp->next = H->next;
 	H->next = temp;
-	/*
-	
-	H->next = p->next;
-	H->next->next = temp;
-	//p->next;
-	p->next = p->next->next;
-
 	*/
+	
 
 }
 void ReverseN2(HLink& H) {
@@ -228,6 +321,7 @@ void SortPriceL(HLink& H) {
 void upBed(HLink& H, int beds) {
 	HLink newNode = (HLink)malloc(sizeof(Hotel));
 	char str1[] = "空闲";
+	int flag = 1;
 	if (!newNode) {
 		exit(-1);
 	}
@@ -237,12 +331,18 @@ void upBed(HLink& H, int beds) {
 	newNode->PriceL = newNode->Price * 0.7;
 	strcpy_s(newNode->State, str1);
 	newNode->Beds = beds;
-	while (p&&p->next) {
+	newNode->next = NULL;
+	while (p && p->next && flag) {
 		if ((newNode->Beds > p->Beds) && (newNode->Beds <= p->next->Beds)) {
 			newNode->next = p->next;
 			p->next = newNode;
+			flag = 0;
 		}
 		p = p->next;
+	}
+	if (flag) {
+		p->next = newNode;
+		
 	}
 }
 
