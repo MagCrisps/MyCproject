@@ -1,5 +1,5 @@
 ﻿// DSExp1.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//实验一>>>酒店管理程序
+//
 
 #include <iostream>
 #define ERROR -1
@@ -207,20 +207,25 @@ HLink FirstH(HLink& H) {
 	return pre;
 }
 void MoveK1(HLink &H,int k){
-	HLink p = H, temp;
-	int i = k - 1;
+	HLink p = H, temp = H,tempt;
+	int i = 0;
 	if (k < 1 || k>5) {
 		printf("out of number");
 		exit(-2);
 	}
-	while (i) {
+	while (i++ < k) {
 		p = p->next;
-		i--;
+
 	}
-	temp = p->next;
-	p->next = temp->next;
-	temp->next = H->next;
-	H->next = temp;
+	while (p->next) {
+		p = p->next;
+		temp = temp->next;
+	}
+	//**
+	tempt = temp->next;
+	temp->next = tempt->next;
+	tempt->next = H->next;
+	H->next = tempt;
 	/*
 	while (p) {
 		p = p->next;
@@ -242,7 +247,7 @@ void MoveK1(HLink &H,int k){
 	temp->next = H->next;
 	H->next = temp;
 	*/
-	
+	Exp(H);
 
 }
 void ReverseN2(HLink& H) {
