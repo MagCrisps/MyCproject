@@ -1,5 +1,4 @@
 ﻿// DSExp2.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
 /*
 串模式匹配实验
 */
@@ -19,24 +18,10 @@ int main()
     int loc = 0;
     bool fl = 0;
     fopen_s(&fp, "data.txt","r");
-    /*
-     str = NULL;
-    char* mod = NULL;
-     if (!fp) {
-        printf("error!\n");
-        exit(-1);
-    }
-    fscanf_s(fp, "%s %s", str,32, mod, 8);
-    fclose(fp);
-    */
     char str[] = "asdasghjkszjhsbxhsnsmsnxhskajzsn";
     char mod[] = "jhsbxhsn";
-   
     Titlem();
-    //printf("%d", sizeof(mod));
-    //puts(str);
-    //putchar('!');
-    //puts(mod);
+   
     while (flag) {
         switch (getchar()) {
         case '0':flag = 0; break;
@@ -208,11 +193,11 @@ void KMPplusAlogrithm(char* str, char* mod, int loc) {
     int is = 0, cos = -1;
     while( is < sizestr &&cos < sizemod - 1) {
             if (str[is] == mod[cos] || cos == -1) {//attention that co can be zero
-                if (co != -1) {
-                    printf("str->> %c || mod->> %c\n", str[i], mod[co]);
+                if (cos != -1) {
+                    printf("str->> %c || mod->> %c\n", str[is], mod[cos]);
                 }
                 else {
-                    printf("str->> %c || mod->> %c\n", str[i], mod[co+1]);
+                    printf("str->> %c || mod->> %c\n", str[is], mod[cos+1]);
                 }
                 cos++;
                 is++;
