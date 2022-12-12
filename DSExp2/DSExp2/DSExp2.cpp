@@ -45,7 +45,7 @@ int main()
         } printf("Please enter number to choose the funcation\n"); break;
         case '4':if (fl) {
             nextv(mod, n);
-            KMPplusAlogrithm(str, mod, loc, n);
+            KMPalogrithm(str, mod, loc, n);
         }
                 else {
             printf("loc is needed");
