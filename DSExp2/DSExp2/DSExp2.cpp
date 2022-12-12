@@ -6,22 +6,22 @@
 
 void Titlem();
 void BFalgorithm(char* str, char* mod, int loc);
-void KMPalogrithm(char* str, char* mod, int loc);
-void KMPplusAlogrithm(char* str, char* mod, int loc);
+void KMPalogrithm(char* str, char* mod, int loc,int* next);
+void KMPplusAlogrithm(char* str, char* mod, int loc,int* nextval);
+void next(char* mod,int next[]);
+void nextv(char* mod,int nextval[]);
 
 int sizestr = 32, sizemod = 8;
 
 int main()
 {
-    FILE* fp;
     char flag = 1;
     int loc = 0;
     bool fl = 0;
-    fopen_s(&fp, "data.txt","r");
     char str[] = "asdasghjkszjhsbxhsnsmsnxhskajzsn";
     char mod[] = "jhsbxhsn";
     Titlem();
-   
+    int n[8];
     while (flag) {
         switch (getchar()) {
         case '0':flag = 0; break;
@@ -37,13 +37,15 @@ int main()
             printf("loc is needed\n");
         }; printf("Please enter number to choose the funcation\n"); break;
         case '3':if (fl) {
-            KMPalogrithm(str, mod, loc);
+            next(mod, n);
+            KMPalogrithm(str, mod, loc, n);
         }
                 else {
             printf("loc is needed");
         } printf("Please enter number to choose the funcation\n"); break;
         case '4':if (fl) {
-            KMPplusAlogrithm(str, mod, loc);
+            nextv(mod, n);
+            KMPplusAlogrithm(str, mod, loc, n);
         }
                 else {
             printf("loc is needed");
@@ -61,6 +63,50 @@ int main()
     }
 
 }
+void next(char* mod,int next[]) {
+    int j = -1, co = 0, nu = 0;//co* figure out whether the alogrithm is done.
+    next[0] = -1;
+    while (nu < sizemod - 1) {
+        if (j == -1 || mod[nu] == mod[j]) {
+            nu++;
+            j++;
+            next[nu] = j;
+        }
+        else {
+            j = next[j];
+        }
+    }
+    printf("the next array generated\n");
+    for (int x = 0; x < 8;x++) {
+        printf("%d,", next[x]);
+    }
+    putchar('\n');
+}
+void nextv(char* mod, int nextval[]) {
+    int i = -1, p = 0;//p fast ;i slow
+    nextval[0] = -1;
+    while (p < sizemod - 1) {
+        if (i == -1 || mod[p] == mod[i]) {
+            p++;
+            i++;
+            if (mod[i] != mod[p]) {
+
+                nextval[p] = i;
+            }
+            else {
+                nextval[p] = nextval[i];
+            }
+        }
+        else {
+            i = nextval[i];
+        }
+    }
+    printf("the next array generated\n");
+    for (int x = 0; x < 8; x++) {
+        printf("%d,", nextval[x]);
+    }
+    putchar('\n');
+}
 void Titlem() {
 
     for (int coun = 0; coun < 64; coun++) {
@@ -71,8 +117,8 @@ void Titlem() {
     //*****
     printf("\t1 >>>>> Enter the first location of the string\n");
     printf("\t2 >>>>> Native pattern matching algorithm\n");
-    printf("\t3 >>>>> KMP improved algorithm\n");
-    printf("\t4 >>>>> KMP improved algorithm plus\n");
+    printf("\t3 >>>>> KMP algorithm\n");
+    printf("\t4 >>>>> KMP improved algorithm\n");
     printf("\t0 >>>>> EXIT\n");
     putchar('\n');
     for (int coun = 0; coun < 64; coun++) {
@@ -98,10 +144,8 @@ void BFalgorithm(char* str, char* mod,int loc) {
             else {
                 printf("str->> %c || mod->> %c\n", str[i], mod[k]);
                 i = i - k + 1;
-               // printf("error\t");
                 k = 0;
         }
-        //printf("JDJSJDr\t");
         
     }
 
@@ -113,30 +157,12 @@ void BFalgorithm(char* str, char* mod,int loc) {
     }
 
 }
-void KMPalogrithm(char* str, char* mod, int loc) {
+void KMPalogrithm(char* str, char* mod, int loc,int next[]) {
     if (loc < 0 || loc>sizestr) {
         printf("loc is illegality\n");
         exit(-1);
     }
-    int next[8];
-    int j = -1,co = 0,nu = 0;//co* figure out whether the alogrithm is done.
-    next[0] = -1;
-    while( nu < sizemod-1) {
-        if (j == -1 || mod[nu] == mod[j]) {
-            nu++;
-            j++;
-            next[nu] = j;
-        }
-        else {
-            j = next[j];
-        }
-    }
-    printf("the next array generated\n");
-    for (int x : next) {
-        printf("%d,", x);
-    }
-    putchar('\n');
-    int i = 0;
+    int co = 0, i = 0;//co* figure out whether the alogrithm is done.
     while ( i < sizestr && co < sizemod-1 ) {
             if (str[i] == mod[co]||co == -1) {//attention that co can be zero
                 if (co != -1) { 
@@ -144,15 +170,15 @@ void KMPalogrithm(char* str, char* mod, int loc) {
                 }
                 else {
                     printf("str->> %c || mod->> %c\n", str[i], mod[co+1]);
-                }
+                }//if 1
                 co++;
                 i++;
-            }
+            }//if 2
             else {
                 co = next[co];
             }
         
-    }
+    }//while 
     if (co == sizemod - 1) {
         printf("the location has successfully been found!\n");
         printf("the location is %d\n", i - co + 1);
@@ -160,36 +186,11 @@ void KMPalogrithm(char* str, char* mod, int loc) {
     }
 
 }
-void KMPplusAlogrithm(char* str, char* mod, int loc) {
+void KMPplusAlogrithm(char* str, char* mod, int loc,int* nextval) {
     if (loc < 0 || loc>sizestr) {
         printf("loc is illegality\n");
         exit(-1);
     }
-    int i = -1, co = 0,p = 0;//p fast ;i slow
-    int nextval[8];
-    nextval[0] = -1;
-    while ( p < sizemod-1 ) {
-        if (i == -1 || mod[p] == mod[i]) {
-            p++;
-            i++;
-            if (mod[i] != mod[p]) {
-                
-                nextval[p] = i;
-                //printf("test %d", nextval[p]);
-            }
-            else {
-                nextval[p] = nextval[i];
-            }
-        }
-        else {
-            i = nextval[i];
-        }
-    }
-    printf("the next array generated\n");
-    for (int x : nextval) {
-        printf("%d,", x);
-    }
-    putchar('\n');
     int is = 0, cos = -1;
     while( is < sizestr &&cos < sizemod - 1) {
             if (str[is] == mod[cos] || cos == -1) {//attention that co can be zero
@@ -210,9 +211,9 @@ void KMPplusAlogrithm(char* str, char* mod, int loc) {
          if (cos == sizemod - 1) {
             printf("the location has successfully been found!\n");
             printf("the location is %d\n", is - cos + 1);
-            printf("the times are %d", is);
+            printf("the times are %d\n", is);
             break;
-        }
+        }//if
         
            
     }
