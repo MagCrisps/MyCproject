@@ -1,4 +1,1 @@
-﻿  exam1.cpp
-C:\Users\D6701\source\repos\exam1\exam1\exam1.cpp(19,1): warning C4326: “main”的返回类型应为“int”而非“void”
-C:\Users\D6701\source\repos\exam1\exam1\exam1.cpp(39,7): warning C4101: “h”: 未引用的局部变量
-  exam1.vcxproj -> C:\Users\D6701\source\repos\exam1\Debug\exam1.exe
+﻿  exam1.vcxproj -> C:\Users\D6701\source\repos\exam1\Debug\exam1.exe

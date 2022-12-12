@@ -42,13 +42,14 @@ void Create(Link& L)//创建链表函数
 	if (!L) {
 		exit(-1);
 	}
-	L->next = NULL;
+	h = L;
 	while (!feof(fp)) {
 
 		Link hp = (Link)malloc(sizeof(LNode));
 		fscanf_s(fp, "%d", &hp->data);
-		hp->next = L->next;
-		L->next = hp;
+		h->next = hp;
+		hp->next = NULL;
+		h = hp;
 	}
 	//printf("READ OVER.\n");
 }
